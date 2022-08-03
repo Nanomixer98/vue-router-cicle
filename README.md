@@ -4,6 +4,8 @@
 
 - Vue router
 - Router lazy loading
+- Receive parameters through url
+- Receive props through url
 
 ## Project setup
 

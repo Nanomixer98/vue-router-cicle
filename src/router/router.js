@@ -5,6 +5,7 @@ const routes = [
         path: '/',
         redirect: '/pokemon'
     },
+    // Pokemon Layout
     {
         path: '/pokemon',
         name: 'pokemon',
@@ -44,6 +45,37 @@ const routes = [
             {
                 path: '',
                 redirect: { name: 'pokemon-about' }
+            }
+        ]
+    },
+    // DBZ Layout
+    {
+        path: '/dbz',
+        name: 'dbz',
+        component: () => import(
+            /* webpackChunkName: "DragonBallLayout" */
+            '@/modules/dbz/layouts/DragonBallLayout'
+        ),
+        children: [
+            {
+                path: 'character',
+                name: 'dbz-characters',
+                component: () => import(
+                    /* webpackChunkName: "CharactersPage" */
+                    '@/modules/dbz/pages/CharactersPage'
+                )
+            },
+            {
+                path: 'about',
+                name: 'dbz-about',
+                component: () => import(
+                    /* webpackChunkName: "AboutPage" */
+                    '@/modules/dbz/pages/AboutPage'
+                )
+            },
+            {
+                path: '',
+                redirect: { name: 'dbz-about' }
             }
         ]
     },

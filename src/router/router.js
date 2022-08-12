@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import isAuthenticatedGuard from "./auth-guard";
 
 const routes = [
     {
@@ -52,6 +53,7 @@ const routes = [
     {
         path: '/dbz',
         name: 'dbz',
+        eforeEnter: [ isAuthenticatedGuard ],
         component: () => import(
             /* webpackChunkName: "DragonBallLayout" */
             '@/modules/dbz/layouts/DragonBallLayout'
@@ -60,6 +62,7 @@ const routes = [
             {
                 path: 'character',
                 name: 'dbz-characters',
+                beforeEnter: [ isAuthenticatedGuard ],
                 component: () => import(
                     /* webpackChunkName: "CharactersPage" */
                     '@/modules/dbz/pages/CharactersPage'
@@ -68,6 +71,7 @@ const routes = [
             {
                 path: 'about',
                 name: 'dbz-about',
+                beforeEnter: [ isAuthenticatedGuard ],
                 component: () => import(
                     /* webpackChunkName: "AboutPage" */
                     '@/modules/dbz/pages/AboutPage'
@@ -93,5 +97,40 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes,
 });
+
+//* Gard Global - Sync
+// router.beforeEach((to, from, next) => {
+//     console.log({to, from, next});
+
+//     const random = Math.random() * 100;
+//     if(random > 50) {
+//         console.log('autenticado');
+//         next()
+//     } else {
+//         console.log(random, 'bloqueado por el script');
+//         next({ name: 'pokemon-home'})
+//     }
+// })
+
+//* Gard Global - Async
+// const canAccess = () => {
+//     return new Promise( resolve => {
+//         const random = Math.random() * 100;
+//         if(random > 50) {
+//             console.log('Autenticado - canAcess');
+//             resolve(true)
+//         } else {
+//             console.log(random, 'bloqueado por el script - canAccess');
+//             resolve(false)
+//         }
+//     })
+// }
+
+// router.beforeEach(async (to, from, next)  => {
+//     const authorized = await canAccess()
+//     authorized 
+//         ? next() 
+//         : next({ name: 'pokemon-home'})
+// })
 
 export default router;

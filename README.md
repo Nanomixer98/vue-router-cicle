@@ -6,6 +6,9 @@
 - Router lazy loading
 - Receive parameters through url
 - Receive props through url
+- Create navbar with personalized ruouting
+- Use of guards(routes protection)
+- Specific guards for components and groups of routes
 
 ## Project setup
 
